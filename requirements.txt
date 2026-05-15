@@ -1,0 +1,15 @@
+pandas
+numpy
+matplotlib
+seaborn
+setuptools
+scikit-learn
+redis
+flask
+alibi-detect
+apache-airflow-providers-google
+psycopg2
+xgboost
+comet-ml
+dvc
+google-cloud-storage
