@@ -59,6 +59,13 @@ class DataProcessing:
             self.X_train = self.scaler.fit_transform(self.X_train)
             self.X_test = self.scaler.transform(self.X_test)
             logger.info("Data scaling done.")
+
+            import pickle
+            os.makedirs("artifacts/models", exist_ok=True)
+            with open("artifacts/models/scaler.pkl", "wb") as f:
+                pickle.dump(self.scaler, f)
+            logger.info("Scaler saved.")
+
         except Exception as e:
             logger.error(f"Error while scaling data: {e}")
             raise CustomException(str(e), sys)

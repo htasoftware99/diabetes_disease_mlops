@@ -13,3 +13,6 @@ xgboost
 comet-ml
 dvc
 google-cloud-storage
+dvc-gs
+fastapi[all]
+uvicorn

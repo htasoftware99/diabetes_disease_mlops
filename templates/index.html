@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Diabetes Prediction</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="grid-bg"></div>
+
+  <header>
+    <div class="logo">
+      <span class="logo-dot"></span>
+      <span>DiabetML</span>
+    </div>
+    <nav>
+      <span class="nav-tag">v1.0</span>
+      <span class="nav-tag">FastAPI</span>
+      <span class="nav-tag">LogisticRegression</span>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="hero-label">MLOps Prediction System</p>
+      <h1>Diabetes<br/><span class="accent">Risk Analysis</span></h1>
+    </section>
+
+    <section class="form-section">
+      <form method="POST" action="/" class="prediction-form" id="predForm">
+
+        <div class="form-grid">
+
+          <div class="field-group">
+            <label for="Pregnancies">
+              <span class="field-num">01</span>
+              Pregnancies
+            </label>
+            <input type="number" id="Pregnancies" name="Pregnancies"
+                   step="1" min="0" placeholder="0 – 17" required />
+            <span class="field-hint">Number of pregnancies</span>
+          </div>
+
+          <div class="field-group">
+            <label for="Glucose">
+              <span class="field-num">02</span>
+              Glucose
+            </label>
+            <input type="number" id="Glucose" name="Glucose"
+                   step="0.1" min="0" placeholder="0 – 200" required />
+            <span class="field-hint">Plasma glucose concentration (mg/dL)</span>
+          </div>
+
+          <div class="field-group">
+            <label for="BloodPressure">
+              <span class="field-num">03</span>
+              Blood Pressure
+            </label>
+            <input type="number" id="BloodPressure" name="BloodPressure"
+                   step="0.1" min="0" placeholder="0 – 122" required />
+            <span class="field-hint">Diastolic blood pressure (mm Hg)</span>
+          </div>
+
+          <div class="field-group">
+            <label for="SkinThickness">
+              <span class="field-num">04</span>
+              Skin Thickness
+            </label>
+            <input type="number" id="SkinThickness" name="SkinThickness"
+                   step="0.1" min="0" placeholder="0 – 99" required />
+            <span class="field-hint">Triceps skin fold thickness (mm)</span>
+          </div>
+
+          <div class="field-group">
+            <label for="Insulin">
+              <span class="field-num">05</span>
+              Insulin
+            </label>
+            <input type="number" id="Insulin" name="Insulin"
+                   step="0.1" min="0" placeholder="0 – 846" required />
+            <span class="field-hint">2-hour serum insulin (mu U/ml)</span>
+          </div>
+
+          <div class="field-group">
+            <label for="BMI">
+              <span class="field-num">06</span>
+              BMI
+            </label>
+            <input type="number" id="BMI" name="BMI"
+                   step="0.1" min="0" placeholder="0.0 – 67.1" required />
+            <span class="field-hint">Body mass index (kg/m²)</span>
+          </div>
+
+          <div class="field-group">
+            <label for="DiabetesPedigreeFunction">
+              <span class="field-num">07</span>
+              Diabetes Pedigree Function
+            </label>
+            <input type="number" id="DiabetesPedigreeFunction"
+                   name="DiabetesPedigreeFunction"
+                   step="0.001" min="0" placeholder="0.078 – 2.420" required />
+            <span class="field-hint">Diabetes likelihood based on family history</span>
+          </div>
+
+          <div class="field-group">
+            <label for="Age">
+              <span class="field-num">08</span>
+              Age
+            </label>
+            <input type="number" id="Age" name="Age"
+                   step="1" min="1" placeholder="21 – 81" required />
+            <span class="field-hint">Age in years</span>
+          </div>
+
+        </div>
+
+        <button type="submit" class="submit-btn">
+          <span class="btn-text">Predict</span>
+          <span class="btn-icon">→</span>
+        </button>
+
+      </form>
+    </section>
+
+    {% if result is not none %}
+    <section class="result-section {{ 'result-positive' if result == 1 else 'result-negative' }}">
+      <div class="result-card">
+        <div class="result-indicator">
+          <div class="pulse-ring"></div>
+          <div class="pulse-dot"></div>
+        </div>
+        <div class="result-content">
+          <p class="result-label">Prediction Result</p>
+          {% if result == 1 %}
+            <h2 class="result-title danger">Diabetes Risk Detected</h2>
+            <p class="result-desc">
+              Based on the entered values, the model produces a <strong>positive</strong> result.
+              It is recommended to consult a healthcare professional.
+            </p>
+          {% else %}
+            <h2 class="result-title safe">No Diabetes Risk Detected</h2>
+            <p class="result-desc">
+              Based on the entered values, the model produces a <strong>negative</strong> result.
+              This is not a definitive medical diagnosis.
+            </p>
+          {% endif %}
+        </div>
+        <div class="result-badge {{ 'badge-danger' if result == 1 else 'badge-safe' }}">
+          {{ "1" if result == 1 else "0" }}
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
+    {% if error is not none %}
+    <section class="error-section">
+      <div class="error-card">
+        <span class="error-icon">⚠</span>
+        <div>
+          <p class="error-label">Error</p>
+          <p class="error-msg">{{ error }}</p>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
+  </main>
+
+  <footer>
+    <span>Built with FastAPI + Scikit-learn</span>
+    <span class="footer-dot">·</span>
+    <span>Comet ML Experiment Tracking</span>
+    <span class="footer-dot">·</span>
+    <span>Redis Feature Store</span>
+  </footer>
+
+  <script>
+    document.getElementById("predForm").addEventListener("submit", function () {
+      const btn = document.querySelector(".submit-btn");
+      btn.classList.add("loading");
+      btn.querySelector(".btn-text").textContent = "Calculating...";
+    });
+  </script>
+
+</body>
+</html>
