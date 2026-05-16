@@ -6,7 +6,6 @@ setuptools
 scikit-learn
 redis
 flask
-alibi-detect
 apache-airflow-providers-google
 psycopg2
 xgboost
@@ -17,3 +16,4 @@ dvc-gs
 fastapi[all]
 uvicorn
 alibi-detect
+prometheus-client
