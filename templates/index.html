@@ -126,6 +126,22 @@
       </form>
     </section>
 
+    {% if drift_warning %}
+    <section class="drift-section">
+      <div class="drift-card">
+        <div class="drift-icon-wrap">
+          <span class="drift-icon">⚠</span>
+        </div>
+        <div class="drift-content">
+          <p class="drift-label">Data Drift Detected</p>
+          <p class="drift-msg">
+            Data Drift Detected: The input data distribution has significantly changed compared to the training data. This may affect model performance. Consider retraining the model with recent data.
+          </p>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
     {% if result is not none %}
     <section class="result-section {{ 'result-positive' if result == 1 else 'result-negative' }}">
       <div class="result-card">
@@ -176,6 +192,8 @@
     <span>Comet ML Experiment Tracking</span>
     <span class="footer-dot">·</span>
     <span>Redis Feature Store</span>
+    <span class="footer-dot">·</span>
+    <span>KSDrift Detection</span>
   </footer>
 
   <script>

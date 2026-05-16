@@ -16,3 +16,4 @@ google-cloud-storage
 dvc-gs
 fastapi[all]
 uvicorn
+alibi-detect
