@@ -79,7 +79,6 @@ Create a `.env` file in the root directory and add your credentials:
 COMET_API_KEY=your_comet_api_key
 COMET_PROJECT_NAME=diabetes-mlops
 COMET_WORKSPACE=your_workspace
-# Add other DB/Cloud credentials as needed
 ```
 
 ### 3. Install Dependencies
