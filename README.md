@@ -6,6 +6,12 @@ This project implements a robust, end-to-end MLOps pipeline for predicting diabe
 
 The goal of this project is to build a scalable and production-ready machine learning system that not only predicts diabetes but also monitors data drift and model performance in real-time.
 
+## 🏗️ System Architecture
+
+<p align="center">
+  <img src="structure.png" width="700"/>
+</p>
+
 ### Key Features:
 - **Automated ETL**: Orchestrated using Apache Airflow (Astro CLI).
 - **Orchestration**: Scalable ML pipelines defined using **Kubeflow Pipelines (KFP)** for containerized execution.
