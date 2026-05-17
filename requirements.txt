@@ -17,3 +17,4 @@ fastapi[all]
 uvicorn
 alibi-detect
 prometheus-client
+kfp
